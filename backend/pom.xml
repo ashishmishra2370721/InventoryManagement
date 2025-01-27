@@ -8,7 +8,7 @@
 		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.phegondev</groupId>
+	<groupId>com.cts</groupId>
 	<artifactId>InventoryManagementSystem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>InventoryManagementSystem</name>

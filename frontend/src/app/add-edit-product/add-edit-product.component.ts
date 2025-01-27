@@ -25,8 +25,6 @@ export class AddEditProductComponent implements OnInit {
   stockQuantity:string = ''
   categoryId:string = ''
   description:string = ''
-  imageFile:File | null = null
-  imageUrl:string = ''
   isEditing:boolean = false
   categories:any[] = []
   message:string = ''
@@ -70,7 +68,7 @@ export class AddEditProductComponent implements OnInit {
           this.stockQuantity = product.stockQuantity;
           this.categoryId = product.caetgoryId;
           this.description = product.description;
-          this.imageUrl = product.imageUrl;
+          // this.imageUrl = product.imageUrl;
         }else{
           this.showMessage(res.message);
         }
@@ -80,17 +78,7 @@ export class AddEditProductComponent implements OnInit {
       }})
   }
 
-  handleImageChange(event: Event):void{
-    const input = event.target as HTMLInputElement;
-    if (input?.files?.[0]) {
-      this.imageFile = input.files[0]
-      const reader = new FileReader();
-      reader.onloadend = () =>{
-        this.imageUrl = reader.result as string
-      }
-      reader.readAsDataURL(this.imageFile);
-    }
-  }
+ 
 
   handleSubmit(event : Event):void{
     event.preventDefault()
@@ -102,10 +90,7 @@ export class AddEditProductComponent implements OnInit {
     formData.append("categoryId", this.categoryId);
     formData.append("description", this.description);
 
-    if (this.imageFile) {
-      formData.append("imageFile", this.imageFile);
-    }
-
+ 
     if (this.isEditing) {
       formData.append("productId", this.productId!);
       this.apiService.updateProduct(formData).subscribe({

@@ -8,7 +8,7 @@
         </div>
 
         <div class="form-group">
-            <label for="">Sku</label>
+            <label for="">Product id</label>
             <input type="text" [(ngModel)]="sku" name="sku" required>
         </div>
 
@@ -37,13 +37,6 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="">Product Image</label>
-            <input type="file" (change)="handleImageChange($event)">
-            <div *ngIf="imageUrl">
-                <img [src]="imageUrl" alt="preview" class="image-preview">
-            </div>
-        </div>
 
         <button type="submit">{{isEditing? 'Edit Product' : 'Add Product'}}</button>
     </form>

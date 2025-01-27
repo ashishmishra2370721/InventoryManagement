@@ -17,6 +17,18 @@
     display: flex;
     gap: 10px;
     }
+
+    .bg-green-50 {
+        background-color: #f0fdf4; /* Light green */
+      }
+      
+      .bg-yellow-50 {
+        background-color: #fefce8; /* Light yellow */
+      }
+      
+      .bg-red-50 {
+        background-color: #fef2f2; /* Light red */
+      }
      
     .transaction-search input {
     border: 1px solid #17a2b8;

@@ -3,46 +3,38 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import CryptoJS from "crypto-js";
 
-
-
 @Injectable({
   providedIn: 'root',
 })
-
-
 export class ApiService {
 
   authStatuschanged = new EventEmitter<void>();
   private static BASE_URL = 'http://localhost:5050/api';
-  private static ENCRYPTION_KEY = "phegon-dev-inventory";
-
+  private static ENCRYPTION_KEY = "cognizant-inventory";
 
   constructor(private http: HttpClient) {}
 
-    // Encrypt data and save to localStorage
-    encryptAndSaveToStorage(key: string, value: string): void {
-      const encryptedValue = CryptoJS.AES.encrypt(value, ApiService.ENCRYPTION_KEY).toString();
-      localStorage.setItem(key, encryptedValue);
-    }
-  
-    // Retreive from localStorage and Decrypt
-    private getFromStorageAndDecrypt(key: string): any {
-      try {
-        const encryptedValue = localStorage.getItem(key);
-        if (!encryptedValue) return null;
-        return CryptoJS.AES.decrypt(encryptedValue, ApiService.ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
-      } catch (error) {
-        return null;
-      }
-    }
-
-    
-  private clearAuth() {
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
+  // Encrypt data and save to localStorage
+  encryptAndSaveToStorage(key: string, value: string): void {
+    const encryptedValue = CryptoJS.AES.encrypt(value, ApiService.ENCRYPTION_KEY).toString();
+    localStorage.setItem(key, encryptedValue);
   }
 
+  // Retrieve from localStorage and Decrypt
+  private getFromStorageAndDecrypt(key: string): any {
+    try {
+      const encryptedValue = localStorage.getItem(key);
+      if (!encryptedValue) return null;
+      return CryptoJS.AES.decrypt(encryptedValue, ApiService.ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
+    } catch (error) {
+      return null;
+    }
+  }
 
+  private clearAuth() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+  }
 
   private getHeader(): HttpHeaders {
     const token = this.getFromStorageAndDecrypt("token");
@@ -50,12 +42,6 @@ export class ApiService {
       Authorization: `Bearer ${token}`,
     });
   }
-
-
-
-
-
-
 
   /***AUTH & USERS API METHODS */
 
@@ -73,15 +59,7 @@ export class ApiService {
     });
   }
 
-
-
-
-
-
-
-
-
-  /**CATEGOTY ENDPOINTS */
+  /**CATEGORY ENDPOINTS */
   createCategory(body: any): Observable<any> {
     return this.http.post(`${ApiService.BASE_URL}/categories/add`, body, {
       headers: this.getHeader(),
@@ -115,11 +93,6 @@ export class ApiService {
       headers: this.getHeader(),
     });
   }
-
-
-
-
-
 
   /** SUPPLIER API */
   addSupplier(body: any): Observable<any> {
@@ -156,21 +129,15 @@ export class ApiService {
     });
   }
 
-
-
-
-
-
-
-  /**PRODUICTS ENDPOINTS */
-  addProduct(formData: any): Observable<any> {
-    return this.http.post(`${ApiService.BASE_URL}/products/add`, formData, {
+  /**PRODUCTS ENDPOINTS */
+  addProduct(body: any): Observable<any> {
+    return this.http.post(`${ApiService.BASE_URL}/products/add`, body, {
       headers: this.getHeader(),
     });
   }
 
-  updateProduct(formData: any): Observable<any> {
-    return this.http.put(`${ApiService.BASE_URL}/products/update`, formData, {
+  updateProduct(body: any): Observable<any> {
+    return this.http.put(`${ApiService.BASE_URL}/products/update`, body, {
       headers: this.getHeader(),
     });
   }
@@ -193,15 +160,7 @@ export class ApiService {
     });
   }
 
-
-
-
-
-
-
-
   /**Transactions Endpoints */
-
   purchaseProduct(body: any): Observable<any> {
     return this.http.post(
       `${ApiService.BASE_URL}/transactions/purchase`,
@@ -231,13 +190,11 @@ export class ApiService {
     });
   }
 
-  
   updateTransactionStatus(id: string, status: string): Observable<any> {
     return this.http.put(`${ApiService.BASE_URL}/transactions/update/${id}`, JSON.stringify(status), {
       headers: this.getHeader().set("Content-Type", "application/json")
     });
   }
-
 
   getTransactionsByMonthAndYear(month: number, year: number): Observable<any> {
     return this.http.get(`${ApiService.BASE_URL}/transactions/by-month-year`, {
@@ -249,31 +206,18 @@ export class ApiService {
     });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-/**AUTHENTICATION CHECKER */
-    
-  logout():void{
-    this.clearAuth()
+  /**AUTHENTICATION CHECKER */
+  logout(): void {
+    this.clearAuth();
   }
 
-  isAuthenticated():boolean{
+  isAuthenticated(): boolean {
     const token = this.getFromStorageAndDecrypt("token");
     return !!token;
   }
 
-  isAdmin():boolean {
+  isAdmin(): boolean {
     const role = this.getFromStorageAndDecrypt("role");
     return role === "ADMIN";
   }
-
 }

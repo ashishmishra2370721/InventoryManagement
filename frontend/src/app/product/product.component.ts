@@ -88,9 +88,6 @@ export class ProductComponent implements OnInit {
   //ADD PRODUCT
 
   addProduct(product : {name : string; sku: string; price : number; stockQuantity : number; imageUrl?:string }):void{
-    if(!product.imageUrl){
-      product.imageUrl = `https://picsum.photos/200/300?random=${Math.random()}`;
-    }
     this.apiService.addProduct(product).subscribe(
       {
         next:(res:any)=>{

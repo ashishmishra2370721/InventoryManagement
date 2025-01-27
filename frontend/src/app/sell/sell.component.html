@@ -1,39 +1,63 @@
-<div class="purchase-form-page">
-    <p *ngIf="message" class="message">{{ message }}</p>
-    <h1>Sell Product</h1>
-  
-    <!-- PRODUCT PURCHASE? INVENTORY RECEIVING PAGE -->
-    <form (ngSubmit)="handleSubmit()">
-  
-      <div class="form-group">
-        <label for="">Select Product</label>
-        <select
-          name="productId"
-          class="form-control"
-          [(ngModel)]="productId"
-          id=""
-        >
-          <option value="">Select a product</option>
-          <option *ngFor="let product of products" [value]="product.id">
-            {{ product.name }}
-          </option>
-        </select>
-      </div>
-      
+<div class="purchase-form-page p-6 bg-gray-100 min-h-screen">
+  <!-- Message Display -->
+  <p *ngIf="message" class="message bg-green-500 text-white p-3 rounded mb-4">
+    {{ message }}
+  </p>
 
-      <div class="form-group">
-          <label for="">Description</label>
-          <input type="text" [(ngModel)]="description" name="description" class="form-control"/>
-        </div>
-  
-  
-      <div class="form-group">
-          <label for="">Quantity</label>
-          <input type="number" [(ngModel)]="quantity" name="quantity" class="form-control"/>
-        </div>
-  
-  
-        <button type="submit" class="btn btn-primary">Sell Product</button>
-    </form>
-  </div>
-  
+  <!-- Page Header -->
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">Sell Product</h1>
+
+  <!-- Sell Product Form -->
+  <form (ngSubmit)="handleSubmit()" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow">
+    <!-- Product Selection -->
+    <div class="form-group mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-1">
+        Select Product
+      </label>
+      <select
+        name="productId"
+        [(ngModel)]="productId"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="">Select a product</option>
+        <option *ngFor="let product of products" [value]="product.id">
+          {{ product.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Description Input -->
+    <div class="form-group mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-1">
+        Description
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="description"
+        name="description"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <!-- Quantity Input -->
+    <div class="form-group mb-6">
+      <label class="block text-sm font-medium text-gray-700 mb-1">
+        Quantity
+      </label>
+      <input
+        type="number"
+        [(ngModel)]="quantity"
+        name="quantity"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+    >
+      Sell Product
+    </button>
+  </form>
+</div>

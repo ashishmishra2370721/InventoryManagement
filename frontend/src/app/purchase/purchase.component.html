@@ -1,33 +1,42 @@
-<div class="purchase-form-page">
-  <p *ngIf="message" class="message">{{ message }}</p>
-  <h1>Receive Inventory</h1>
+<div class="purchase-form-page p-6 bg-gray-100 min-h-screen">
+  <!-- Message Display -->
+  <p *ngIf="message" class="message bg-green-500 text-white p-3 rounded mb-4">
+    {{ message }}
+  </p>
 
-  <!-- PRODUCT PURCHASE? INVENTORY RECEIVING PAGE -->
-  <form (ngSubmit)="handleSubmit()">
+  <!-- Page Header -->
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">Receive Inventory</h1>
 
-    <div class="form-group">
-      <label for="productId">Select Product</label>
+  <!-- Purchase Form -->
+  <form (ngSubmit)="handleSubmit()" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow">
+    <!-- Product Selection -->
+    <div class="form-group mb-4">
+      <label for="productId" class="block text-sm font-medium text-gray-700 mb-1">
+        Select Product
+      </label>
       <select
         name="productId"
-        class="form-control"
         [(ngModel)]="productId"
         id="productId"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="">Select a product</option>
         <option *ngFor="let product of products" [value]="product.id">
           {{ product.name }}
         </option>
-        
       </select>
     </div>
-    
-    <div class="form-group">
-      <label for="supplierId">Select Supplier</label>
+
+    <!-- Supplier Selection -->
+    <div class="form-group mb-4">
+      <label for="supplierId" class="block text-sm font-medium text-gray-700 mb-1">
+        Select Supplier
+      </label>
       <select
         name="supplierId"
-        class="form-control"
         [(ngModel)]="supplierId"
         id="supplierId"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="">Select a Supplier</option>
         <option *ngFor="let supplier of suppliers" [value]="supplier.id">
@@ -36,18 +45,38 @@
       </select>
     </div>
 
-    <div class="form-group">
-        <label for="">Description</label>
-        <input type="text" [(ngModel)]="description" name="description" class="form-control"/>
-      </div>
+    <!-- Description Input -->
+    <div class="form-group mb-4">
+      <label for="description" class="block text-sm font-medium text-gray-700 mb-1">
+        Description
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="description"
+        name="description"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
 
+    <!-- Quantity Input -->
+    <div class="form-group mb-6">
+      <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">
+        Quantity
+      </label>
+      <input
+        type="number"
+        [(ngModel)]="quantity"
+        name="quantity"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
 
-    <div class="form-group">
-        <label for="">Quantity</label>
-        <input type="number" [(ngModel)]="quantity" name="quantity" class="form-control"/>
-      </div>
-
-
-      <button type="submit" class="btn btn-primary">Purchase Product</button>
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+    >
+      Purchase Product
+    </button>
   </form>
 </div>

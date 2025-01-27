@@ -1,6 +1,6 @@
-<div class="dashboard-layout">
+<!-- <div class="dashboard-layout">
   <!-- SIDEBAR -->
-  <div class="sidebar">
+  <!-- <div class="sidebar">
     <h1 class="ims">IMS</h1>
     <ul class="nav-links">
       <li *ngIf="isAuth()"><a routerLink="/dashboard">Dashbaord</a></li>
@@ -15,10 +15,41 @@
       <li *ngIf="!isAuth()"><a routerLink="/register">Register</a></li>
       <li *ngIf="isAuth()"><a (click)="logOut()" >Logout</a></li>
     </ul>
+  </div> -->
+
+  <!-- MAIN CONTENT Area-->
+   <!-- <div class="main-content">
+      <router-outlet></router-outlet>
+   </div>
+</div> --> -->
+
+
+<div class="dashboard-layout">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h1 class="ims">IMS</h1>
+    <ul class="nav-links">
+      <!-- Common routes for authenticated users -->
+      <!-- <li *ngIf="isAuth()"><a routerLink="/dashboard">Dashboard</a></li> -->
+      <li *ngIf="isAuth()"><a routerLink="/transaction">Transactions</a></li>
+      <li *ngIf="isAuth() && !isAdmin()"><a routerLink="/purchase">Purchase</a></li>
+      <li *ngIf="isAuth() && !isAdmin()"><a routerLink="/sell">Sell</a></li>
+      <li *ngIf="isAuth()"><a routerLink="/profile">Profile</a></li>
+
+      <!-- Admin-only routes -->
+      <li *ngIf="isAdmin()"><a routerLink="/category">Category</a></li>
+      <li *ngIf="isAdmin()"><a routerLink="/product">Product</a></li>
+      <li *ngIf="isAdmin()"><a routerLink="/supplier">Supplier</a></li>
+
+      <!-- Authentication-related routes -->
+      <li *ngIf="!isAuth()"><a routerLink="/login">Login</a></li>
+      <li *ngIf="!isAuth()"><a routerLink="/register">Register</a></li>
+      <li *ngIf="isAuth()"><a (click)="logOut()">Logout</a></li>
+    </ul>
   </div>
 
   <!-- MAIN CONTENT Area-->
-   <div class="main-content">
-      <router-outlet></router-outlet>
-   </div>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
 </div>

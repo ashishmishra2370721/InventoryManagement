@@ -1,29 +1,58 @@
-<div class="category-page">
-  <div *ngIf="message" class="message">
+<div class="category-page p-6 bg-gray-100 min-h-screen">
+  <!-- Message Display -->
+  <div *ngIf="message" class="message bg-green-500 text-white p-3 rounded mb-4">
     {{ message }}
   </div>
 
-  <div class="category-header">
-    <h1>Category</h1>
-    <!-- FORM TO ADD AND EDIT CATEGORY -->
-    <div class="add-cat">
+  <!-- Category Header -->
+  <div class="category-header mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-4">Categories</h1>
+
+    <!-- Form to Add and Edit Category -->
+    <div class="add-cat flex gap-2">
       <input
         type="text"
         [(ngModel)]="categoryName"
         placeholder="Category name"
+        class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow"
       />
-      <button *ngIf="!isEditing" (click)="addCategory()">Add Category</button>
-      <button *ngIf="isEditing" (click)="editCategory()">Edit Category</button>
+      <button
+        *ngIf="!isEditing"
+        (click)="addCategory()"
+        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+      >
+        Add Category
+      </button>
+      <button
+        *ngIf="isEditing"
+        (click)="editCategory()"
+        class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors"
+      >
+        Edit Category
+      </button>
     </div>
   </div>
 
-  <!-- DISPLAY THE CATEGORIES -->
-  <ul *ngIf="categories.length > 0" class="category-list">
-    <li *ngFor="let category of categories" class="category-item">
-      <span>{{ category.name }}</span>
-      <div class="category-actions">
-        <button (click)="handleEditCategory(category)">Edit</button>
-        <button (click)="handleDeleteCategory(category.id)">Delete</button>
+  <!-- Display the Categories -->
+  <ul *ngIf="categories.length > 0" class="category-list bg-white rounded-lg shadow">
+    <li
+      *ngFor="let category of categories"
+      class="category-item p-4 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors"
+    >
+      <span class="text-gray-900">{{ category.name }}</span>
+      <div class="category-actions flex gap-2">
+        <button
+          (click)="handleEditCategory(category)"
+          class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition-colors"
+        >
+          Edit
+        </button>
+        <button
+          (click)="handleDeleteCategory(category.id)"
+          class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition-colors"
+        >
+          Delete
+        </button>
       </div>
     </li>
   </ul>

@@ -1,26 +1,26 @@
-<div class="pagination-container">
-    <!-- PREVIOIUS BUTTON -->
+<div class="pagination-container flex justify-center items-center gap-2 mt-6">
+  <!-- Previous Button -->
   <button
-    class="pagination-button"
+    class="pagination-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
     [disabled]="currentPage === 1"
     (click)="onPageChange(currentPage - 1)"
   >
     &laquo; Prev
   </button>
 
-    <!-- Page numbers BUTTONs -->
+  <!-- Page Numbers -->
   <button
     *ngFor="let number of pageNumbers"
-    class="pagination-button"
-    [class.active]="currentPage === number"
+    class="pagination-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+    [class.bg-blue-700]="currentPage === number"
     (click)="onPageChange(number)"
   >
     {{ number }}
   </button>
 
-    <!-- NEXT BUTTON -->
+  <!-- Next Button -->
   <button
-    class="pagination-button"
+    class="pagination-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
     [disabled]="currentPage === totalPages"
     (click)="onPageChange(currentPage + 1)"
   >
